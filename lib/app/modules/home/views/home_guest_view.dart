@@ -10,9 +10,8 @@ class _HomeGuestViewState extends State<HomeGuestView> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      _selectedIndex = index; // Update the selected index
     });
-    // Add navigation logic here if needed
   }
 
   @override
@@ -36,34 +35,7 @@ class _HomeGuestViewState extends State<HomeGuestView> {
           ),
         ],
       ),
-      body: Container(
-        color: Colors.green.withOpacity(0.2), // Main content background color
-        padding: EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            _productCard(
-              imageUrl: 'assets/paracetamol.png',
-              title: 'Paracetamol',
-              type: 'Tablet',
-              price: 'Rp20.000',
-            ),
-            SizedBox(height: 10),
-            _productCard(
-              imageUrl: 'assets/bodrex.png',
-              title: 'Bodrex',
-              type: 'Tablet',
-              price: 'Rp10.000',
-            ),
-            SizedBox(height: 10),
-            _productCard(
-              imageUrl: 'assets/cerini.png',
-              title: 'Cerini',
-              type: 'Sirup',
-              price: 'Rp30.000',
-            ),
-          ],
-        ),
-      ),
+      body: _selectedIndex == 0 ? _buildHomeContent() : _buildRiwayatContent(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white, // Bottom navigation bar color
         items: [
@@ -101,6 +73,60 @@ class _HomeGuestViewState extends State<HomeGuestView> {
     );
   }
 
+  // Method to build home content for guest
+  Widget _buildHomeContent() {
+    return Center(
+      child: ListView(
+        padding: EdgeInsets.all(16.0),
+        children: [
+          _productCard(
+            imageUrl: 'assets/paracetamol.png',
+            title: 'Paracetamol',
+            type: 'Tablet',
+            price: 'Rp20.000',
+          ),
+          SizedBox(height: 10),
+          _productCard(
+            imageUrl: 'assets/bodrex.png',
+            title: 'Bodrex',
+            type: 'Tablet',
+            price: 'Rp10.000',
+          ),
+          SizedBox(height: 10),
+          _productCard(
+            imageUrl: 'assets/cerini.png',
+            title: 'Cerini',
+            type: 'Sirup',
+            price: 'Rp30.000',
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Method to build Riwayat content for guest
+  Widget _buildRiwayatContent() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/your_icon_image.png', // Replace with your icon asset
+            height: 100, // Adjust height as needed
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              // Login action
+            },
+            child: Text('Silakan Login'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Method to build product card for Home
   Widget _productCard({
     required String imageUrl,
     required String title,

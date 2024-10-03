@@ -4,6 +4,8 @@ import 'package:flutter_application_kelas_d/app/modules/home/views/home_logged_i
 import 'package:flutter_application_kelas_d/app/modules/loginsign/controllers/loginsign_controller.dart';
 import 'package:flutter_application_kelas_d/app/modules/loginsign/views/login_view.dart';
 import 'package:flutter_application_kelas_d/app/modules/loginsign/views/signup_view.dart';
+import 'package:flutter_application_kelas_d/app/modules/riwayat/views/riwayat_guest_view.dart';
+import 'package:flutter_application_kelas_d/app/modules/riwayat/views/riwayat_logged_in.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -42,6 +44,23 @@ class AppPages {
         Get.lazyPut(() => HomeController());
       }),
     ),
-    // Riwayat route
+    // Riwayat route for logged-in users
+    GetPage(
+      name: AppRoutes.RIWAYAT_LOGGED_IN,
+      page: () => RiwayatLoggedInView(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() =>
+            HomeController()); // You can use a separate controller if needed
+      }),
+    ),
+    // Riwayat route for guest users
+    GetPage(
+      name: AppRoutes.RIWAYAT_GUEST,
+      page: () => RiwayatGuestView(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() =>
+            HomeController()); // You can use a separate controller if needed
+      }),
+    ),
   ];
 }
