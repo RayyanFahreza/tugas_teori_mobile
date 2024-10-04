@@ -22,17 +22,21 @@ class SignUpView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 50),
-              Image.asset('assets/logo.png', height: 120),
+              Image.asset('assets/logo.png',
+                  height: 200), // Increased logo size
               SizedBox(height: 20),
               Text('Sign Up',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+                  style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF6C53FD))),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 24.0),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Color(0xFFD9D9D9).withOpacity(0.9),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
@@ -61,16 +65,25 @@ class SignUpView extends StatelessWidget {
                       SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: controller.signUp,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFFA1CCA5),
+                        ),
                         child: Text('Sign Up'),
                       ),
                       TextButton(
                         onPressed: () => Get.toNamed('/login'),
-                        child: Text('Sudah Mendaftar? Log in'),
+                        child: Text(
+                          'Sudah Mendaftar? Log in',
+                          style: TextStyle(color: Color(0xFF6C53FD)),
+                        ),
                       ),
                       SizedBox(height: 10),
                       TextButton(
                         onPressed: controller.loginAsGuest,
-                        child: Text('Masuk Tanpa Login'),
+                        child: Text(
+                          'Masuk Tanpa Login',
+                          style: TextStyle(color: Color(0xFF6C53FD)),
+                        ),
                       ),
                     ],
                   ),

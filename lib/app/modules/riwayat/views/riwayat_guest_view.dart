@@ -61,22 +61,33 @@ class _RiwayatGuestViewState extends State<RiwayatGuestView> {
 
   // Method to build Riwayat content for Guest
   Widget _buildRiwayatContent() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'assets/your_icon_image.png', // Replace with your icon asset
-            height: 100, // Adjust height as needed
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              // Login action
-            },
-            child: Text('Silakan Login'),
-          ),
-        ],
+    return Container(
+      color: Colors.green
+          .withOpacity(0.2), // Matching main content background color
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/please_login.png', // Replace with your icon asset
+              height: 100, // Adjust height as needed
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Login action
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, // Button color
+              ),
+              child: Text(
+                'Silakan Login',
+                style: TextStyle(
+                    color: Colors.white), // Change text color to white
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

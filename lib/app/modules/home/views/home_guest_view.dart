@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeGuestView extends StatefulWidget {
   @override
@@ -75,9 +76,10 @@ class _HomeGuestViewState extends State<HomeGuestView> {
 
   // Method to build home content for guest
   Widget _buildHomeContent() {
-    return Center(
+    return Container(
+      color: Colors.green.withOpacity(0.2), // Main content background color
+      padding: EdgeInsets.all(16.0),
       child: ListView(
-        padding: EdgeInsets.all(16.0),
         children: [
           _productCard(
             imageUrl: 'assets/paracetamol.png',
@@ -106,22 +108,33 @@ class _HomeGuestViewState extends State<HomeGuestView> {
 
   // Method to build Riwayat content for guest
   Widget _buildRiwayatContent() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'assets/your_icon_image.png', // Replace with your icon asset
-            height: 100, // Adjust height as needed
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              // Login action
-            },
-            child: Text('Silakan Login'),
-          ),
-        ],
+    return Container(
+      color: Colors.green
+          .withOpacity(0.2), // Matching main content background color
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/please_login.png', // Replace with your icon asset
+              height: 100, // Adjust height as needed
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Login action
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, // Button color
+              ),
+              child: Text(
+                'Silakan Login',
+                style: TextStyle(
+                    color: Colors.white), // Change text color to white
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -134,6 +147,10 @@ class _HomeGuestViewState extends State<HomeGuestView> {
     required String price,
   }) {
     return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -153,7 +170,6 @@ class _HomeGuestViewState extends State<HomeGuestView> {
                 ],
               ),
             ),
-            SizedBox(width: 10),
             ElevatedButton(
               onPressed: () {
                 // Login action
