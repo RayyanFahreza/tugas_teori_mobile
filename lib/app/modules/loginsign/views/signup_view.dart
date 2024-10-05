@@ -29,7 +29,7 @@ class SignUpView extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF6C53FD))),
+                      color: Colors.black)), // Changed to black
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
@@ -68,13 +68,29 @@ class SignUpView extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFFA1CCA5),
                         ),
-                        child: Text('Sign Up'),
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                              color: Colors.white), // Changed to white
+                        ),
                       ),
                       TextButton(
                         onPressed: () => Get.toNamed('/login'),
-                        child: Text(
-                          'Sudah Mendaftar? Log in',
-                          style: TextStyle(color: Color(0xFF6C53FD)),
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Sudah Mendaftar? ',
+                                style: TextStyle(
+                                    color: Colors.black), // Black color
+                              ),
+                              TextSpan(
+                                text: 'Log In',
+                                style: TextStyle(
+                                    color: Color(0xFF6C53FD)), // Purple color
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: 10),

@@ -25,18 +25,20 @@ class _HomeGuestViewState extends State<HomeGuestView> {
           IconButton(
             icon: Icon(Icons.calendar_today),
             onPressed: () {
-              // Event button action
+              // Show custom design for Agenda (Prompt guest to login)
+              _showCartOrAgendaPrompt();
             },
           ),
           IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
-              // Cart button action
+              // Show custom design for Cart (Prompt guest to login)
+              _showCartOrAgendaPrompt();
             },
           ),
         ],
       ),
-      body: _selectedIndex == 0 ? _buildHomeContent() : _buildRiwayatContent(),
+      body: _getSelectedContent(), // Get content based on tab
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white, // Bottom navigation bar color
         items: [
@@ -67,14 +69,26 @@ class _HomeGuestViewState extends State<HomeGuestView> {
           ),
         ],
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: Colors.green, // Change selected item color
-        unselectedItemColor: Colors.black, // Change unselected item color
+        onTap: _onItemTapped, // Handle tab change
+        selectedItemColor: Colors.green, // Selected tab color
+        unselectedItemColor: Colors.black, // Unselected tab color
       ),
     );
   }
 
-  // Method to build home content for guest
+  // Method to build content based on the selected tab
+  Widget _getSelectedContent() {
+    switch (_selectedIndex) {
+      case 0:
+        return _buildHomeContent(); // Home content
+      case 4:
+        return _buildProfilePrompt(); // Show profile prompt for guest
+      default:
+        return _buildMustLoginContent(); // For other tabs show login prompt
+    }
+  }
+
+  // Build Home Tab Content
   Widget _buildHomeContent() {
     return Container(
       color: Colors.green.withOpacity(0.2), // Main content background color
@@ -106,31 +120,33 @@ class _HomeGuestViewState extends State<HomeGuestView> {
     );
   }
 
-  // Method to build Riwayat content for guest
-  Widget _buildRiwayatContent() {
+  // Profile Prompt for Guest Users (Using built-in Icon instead of image)
+  Widget _buildProfilePrompt() {
     return Container(
-      color: Colors.green
-          .withOpacity(0.2), // Matching main content background color
+      color: Colors.green.withOpacity(0.2), // Main content background color
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/please_login.png', // Replace with your icon asset
-              height: 100, // Adjust height as needed
+            // Built-in Icon for Profile Prompt
+            Icon(
+              Icons.person, // Person icon
+              size: 100, // Set icon size to 100
+              color: Colors.black, // Icon color
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Login action
+                Get.toNamed('/login'); // Navigate to login screen
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green, // Button color
               ),
               child: Text(
-                'Silakan Login',
+                'Login', // Login button
                 style: TextStyle(
-                    color: Colors.white), // Change text color to white
+                    color: Colors.white, // Change text color to white
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ],
@@ -139,7 +155,86 @@ class _HomeGuestViewState extends State<HomeGuestView> {
     );
   }
 
-  // Method to build product card for Home
+  // General Login Prompt for Restricted Tabs (Riwayat, Notifikasi, Resep)
+  Widget _buildMustLoginContent() {
+    return Container(
+      color: Colors.green
+          .withOpacity(0.2), // Matching main content background color
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.lock, // Lock icon for login prompt
+              size: 100, // Set icon size to 100
+              color: Colors.black, // Icon color
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Get.toNamed('/login'); // Navigate to login screen
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, // Button color
+              ),
+              child: Text(
+                'Silakan Login', // Prompt user to login
+                style: TextStyle(
+                    color: Colors.white, // Change text color to white
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Cart and Agenda Prompt for Guest Users
+  void _showCartOrAgendaPrompt() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Image for Cart or Agenda Prompt (replace with your asset)
+                Icon(
+                  Icons.lock, // Using shopping cart icon for the prompt
+                  size: 100, // Set icon size to 100
+                  color: Colors.black, // Icon color
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.toNamed('/login'); // Navigate to login screen
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green, // Button color
+                  ),
+                  child: Text(
+                    'Silakan Login', // Login button
+                    style: TextStyle(
+                        color: Colors.white, // Change text color to white
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  // Product Card Method (used in Home Tab)
   Widget _productCard({
     required String imageUrl,
     required String title,
@@ -172,9 +267,15 @@ class _HomeGuestViewState extends State<HomeGuestView> {
             ),
             ElevatedButton(
               onPressed: () {
-                // Login action
+                Get.toNamed('/login'); // Redirect guest to login to purchase
               },
-              child: Text('Silakan Login'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+              ),
+              child: Text(
+                'Silakan Login', // Prompt user to login before purchase
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),

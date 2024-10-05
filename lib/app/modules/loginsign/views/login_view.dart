@@ -29,7 +29,7 @@ class LoginView extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF6C53FD))),
+                      color: Colors.black)), // Changed to black
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
@@ -60,13 +60,29 @@ class LoginView extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFFA1CCA5),
                         ),
-                        child: Text('Log In'),
+                        child: Text(
+                          'Log In',
+                          style: TextStyle(
+                              color: Colors.white), // Changed to white
+                        ),
                       ),
                       TextButton(
                         onPressed: () => Get.toNamed('/signup'),
-                        child: Text(
-                          'Belum Mendaftar? Sign Up',
-                          style: TextStyle(color: Color(0xFF6C53FD)),
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Belum Mendaftar? ',
+                                style: TextStyle(
+                                    color: Colors.black), // Black color
+                              ),
+                              TextSpan(
+                                text: 'Sign Up',
+                                style: TextStyle(
+                                    color: Color(0xFF6C53FD)), // Purple color
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: 10),
